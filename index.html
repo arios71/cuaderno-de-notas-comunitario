@@ -25,6 +25,30 @@ button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,in
 @media(max-width:650px){.topbar{padding:9px 11px}.top-inner{align-items:flex-start}.brand{padding-top:5px}.actions{gap:5px}.btn{padding:7px 8px;font-size:11px}.status{width:100%;text-align:left}.workspace{margin:14px auto 28px;padding:0 8px}.paper{padding:32px 24px 42px;min-height:80vh}.meta-grid{grid-template-columns:1fr;gap:12px}.editor{font-size:16px}.footer-note{flex-direction:column}.ref-options{grid-template-columns:1fr}}
 @media print{@page{size:letter;margin:.55in}html,body{background:#fff!important}.topbar,.no-print,.modal-backdrop{display:none!important}.workspace{margin:0;padding:0;max-width:none}.paper{max-width:none;min-height:0;margin:0;padding:0;border:0;box-shadow:none}.paper:before{display:none}.title-input{font-size:26pt;min-height:0;overflow:visible;white-space:pre-wrap}.field input{border:0;padding:2px 0}.editor{font-size:11pt;line-height:1.45}.editor p{margin-bottom:8pt}.footer-note{margin-top:20pt}.kicker{margin-top:0}}
 </style>
+<!-- Google Analytics 4: Cuaderno de Notas Comunitario -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ5Q0LDPWE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TQ5Q0LDPWE');
+
+  // Eventos de uso de la versión comunitaria (sin recopilar el contenido de las notas).
+  document.addEventListener('click', function(event) {
+    const button = event.target.closest('#installBtn, #exportBackupBtn, #shareBackupBtn, #importBackupBtn');
+    if (!button) return;
+    const events = {
+      installBtn: 'install_button_click',
+      exportBackupBtn: 'backup_export_click',
+      shareBackupBtn: 'backup_share_click',
+      importBackupBtn: 'backup_import_click'
+    };
+    gtag('event', events[button.id], {app_section: 'community_notebook'});
+  });
+  window.addEventListener('appinstalled', function() {
+    gtag('event', 'pwa_installed', {app_section: 'community_notebook'});
+  });
+</script>
 </head>
 <body>
 <header class="topbar no-print"><div class="top-inner"><div class="brand">Cuaderno de notas<small>Artículos · Apuntes · Reflexiones</small></div><div class="actions"><button class="btn primary" id="newBtn">＋ Nuevo</button><button class="btn" id="saveBtn">Guardar ahora</button><button class="btn" id="libraryBtn">Biblioteca</button><button class="btn gold" id="installBtn" type="button">Instalar</button><button class="btn" id="shareBtn">Compartir</button><button class="btn" id="wordBtn">Word</button><button class="btn" id="pdfBtn">PDF / Imprimir</button><button class="btn gold" id="htmlBtn">Guardar HTML</button><span class="status" id="saveStatus">Guardado local</span></div></div></header>
