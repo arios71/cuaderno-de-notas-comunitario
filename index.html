@@ -32,6 +32,22 @@ button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,in
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TQ5Q0LDPWE');
+
+  // Eventos de uso de la versión comunitaria (sin recopilar el contenido de las notas).
+  document.addEventListener('click', function(event) {
+    const button = event.target.closest('#installBtn, #exportBackupBtn, #shareBackupBtn, #importBackupBtn');
+    if (!button) return;
+    const events = {
+      installBtn: 'install_button_click',
+      exportBackupBtn: 'backup_export_click',
+      shareBackupBtn: 'backup_share_click',
+      importBackupBtn: 'backup_import_click'
+    };
+    gtag('event', events[button.id], {app_section: 'community_notebook'});
+  });
+  window.addEventListener('appinstalled', function() {
+    gtag('event', 'pwa_installed', {app_section: 'community_notebook'});
+  });
 </script>
 </head>
 <body>
